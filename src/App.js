@@ -14,7 +14,6 @@ import MySpace from './pages/MySpace';
 import Formulaire from './pages/Contact/Formulaire';
 import NewStretch from './pages/NewStretch';
 import Footer from './components/Footer/Footer';
-import About from './pages/About';
 
 
 const App = () => {
@@ -44,7 +43,6 @@ const handleLogout = () => {
       <Navbar isLogged={isLogged} onLogout={handleLogout}/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path="about" element={<About />}/>
         <Route path='/stretches' element={<Stretches isLogged={isLogged} isAdmin={isAdmin}/>} />
         <Route path='/stretches/:id' element={<Stretch isAdmin={isAdmin} isLogged={isLogged}/>} />
         <Route path='/login' element={<Login onSubmitLoginForm={handleLogin} />} />

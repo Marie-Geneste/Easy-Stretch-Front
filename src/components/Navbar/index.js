@@ -46,9 +46,6 @@ const Navbar = ({ isLogged, onLogout }) => {
                     <Link className="stretches" to="/stretches">
                         Étirements
                     </Link>
-                    <Link className="about" to="/about">
-                        A propos
-                    </Link>
                     <Link className="contact" to="/contact">
                         Contact
                     </Link>
