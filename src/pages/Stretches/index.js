@@ -42,7 +42,7 @@ export default class Stretches extends Component {
   filterData = () => {
     const { searchTerm } = this.state
     return this.state.stretches.filter((rawdata) => {
-      return rawdata.title.toLowerCase().includes(searchTerm.toLowerCase())
+      return rawdata.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
   }
 
@@ -87,11 +87,11 @@ export default class Stretches extends Component {
                             .map((stretch) => (
                               <Card
                                 id={stretch.id}
-                                title={stretch.title}
+                                title={stretch.name}
                                 description={stretch.description}
                                 img={stretch.main_image}
-                                alt={stretch.title}
-                                hover={stretch.title}
+                                alt={stretch.name}
+                                hover={stretch.name}
                                 key={stretch.id}
                                 link={stretch.id}
                                 isLogged={this.props.isLogged}

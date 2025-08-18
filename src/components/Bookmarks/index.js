@@ -45,11 +45,11 @@ const Bookmarks = () => {
           bookmarks.map((stretch) => (
             <div key={stretch.id} className='card-container'>
               <Card
-                title={stretch.title}
+                title={stretch.name}
                 description={stretch.description}
                 img={stretch.main_image}
-                alt={stretch.title}
-                hover={stretch.title}
+                alt={stretch.name}
+                hover={stretch.name}
                 key={stretch.id}
                 link={stretch.id}
               />

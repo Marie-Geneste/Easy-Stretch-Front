@@ -62,8 +62,8 @@ const Stretch = ({isLogged, isAdmin}) => {
                 <div className="stretch-image-container">
                     <img 
                         src={stretch.main_image}
-                        alt={stretch.title}
-                        title={stretch.title}
+                        alt={stretch.name}
+                        title={stretch.name}
                         className="stretch-image"
                     />
                 {isLogged ? (
@@ -76,8 +76,8 @@ const Stretch = ({isLogged, isAdmin}) => {
                 {onEdit ? 
                 <StretchForm stretch={stretch} setStretch={setStretch} id={id} setOnEdit={setOnEdit}/> : 
                 (<div className="stretch-infos">
-                    <h1>{stretch.title}</h1>
-                    <p>{stretch.description_content}</p>
+                    <h1>{stretch.name}</h1>
+                    <p>{stretch.description}</p>
                     {isAdmin ? (
                                 <div className="icon-box">
                                 <AiOutlineEdit onClick={handleEdit} />

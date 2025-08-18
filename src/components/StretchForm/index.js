@@ -68,7 +68,7 @@ console.log(userValue);
      <p>
           Nom de l'étirement:
       </p>
-        <input type="text" name="title" value={userValue.title} className='infos' placeholder={stretch.title} onChange={handleChange}/> 
+        <input type="text" name="title" value={userValue.title} className='infos' placeholder={stretch.name} onChange={handleChange}/> 
         <p>
           URL de la photo:
       </p>
@@ -76,7 +76,7 @@ console.log(userValue);
         <p>
           Description:
         </p>
-        <textarea rows="5" cols="45" type="text" name="description_content" value={userValue.description_content} className='infos'  placeholder={stretch.description_content} onChange={handleChange}/>
+        <textarea rows="5" cols="45" type="text" name="description_content" value={userValue.description_content} className='infos'  placeholder={stretch.description} onChange={handleChange}/>
 
         <button className="modify-btn" >Enregistrer</button>
     </form> 
