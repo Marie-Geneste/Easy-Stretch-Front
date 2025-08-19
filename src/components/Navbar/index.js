@@ -7,7 +7,7 @@ import Toggle from '../Toggle';
 
 // Styles
 import './styles.scss';
-import logo from '../../assets/img/logo.svg';
+import logoES from '../../assets/img/favicon.png'
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -38,7 +38,8 @@ const Navbar = ({ isLogged, onLogout }) => {
     const desktopNav = () => {
         return (
             <div className="nav-container">
-                <img src={logo} alt="OStretch logo" />
+                <img src={logoES} alt="Easy Stretch logo" />
+
                 <ul className="nav-links">
                     <Link className="home" to="/">
                         Accueil
@@ -65,7 +66,7 @@ const Navbar = ({ isLogged, onLogout }) => {
     const mobileNav = () => {
         return (
             <div className="mobile-dropdown">
-                <img src={logo} alt="OStretch logo" />
+                <img src={logoES} alt="Easy Stretch logo" />
                 <GiHamburgerMenu
                     className='mobile-dropdown-icon'
                     onClick={handleDropdown}

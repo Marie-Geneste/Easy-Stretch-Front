@@ -22,7 +22,7 @@ const Footer = () => {
                     Tout le monde connaît les étirements mais ils sont trop souvent délaissés malgré leurs effets bénéfiques sur la récupération, la posture et la prévention des blessures.
                 </p>
                 <p>
-                    OStretch a pour but de vous aider à mieux comprendre les étirements et de vous proposer des séances d'étirements adaptées à vos besoins.
+                    Easy Stretch a pour but de vous aider à mieux comprendre les étirements et de vous proposer des séances d'étirements adaptées à vos besoins.
                 </p>
             </div>
 
@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
 
             <div className='footer-legal'>
-                <p>© 2023 Copyright - OStretch</p>
+                <p>© 2025 Copyright - Easy Stretch</p>
             </div>
         </div>
     );

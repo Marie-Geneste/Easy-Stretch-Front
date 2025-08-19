@@ -1,6 +1,6 @@
 
 import './styles.scss';
-import logo from '../../assets/img/logo.svg';
+import logoES from '../../assets/img/favicon.png'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import axios from 'axios';
@@ -53,7 +53,7 @@ const handleSubmit = async (e) =>{
     return (
 <div className="login">
         <div className="box-container">
-            <img src={logo} alt="" />
+            <img src={logoES} alt="logo Easy Stretch" />
             <h2>Se connecter</h2>
             {
             error ? <div className='error'> Mauvaise adresse email et/ou mot de passe </div> : null

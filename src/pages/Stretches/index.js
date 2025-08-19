@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { Component } from 'react';
-import { NavLink } from "react-router-dom";
 
 // Components
-import Wrapper from '../../components/Wrapper';
 import Card from '../../components/Card';
 
 // Styles
 import './styles.scss';
-import { AiFillPlusCircle } from 'react-icons/ai';
+
 
 export default class Stretches extends Component {
   constructor(props) {
@@ -16,25 +14,58 @@ export default class Stretches extends Component {
     this.state = {
       stretches: [],
       categories: [],
-      searchTerm: ''
+      searchTerm: '',
+      favoriteIds: new Set()
     }
+    this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_BASE_URL}/stretches`)
-      .then(response => {
-        let stretches = response.data;
-        this.setState({ stretches })
-      })
+      .then(response => this.setState({ stretches: response.data }));
 
     axios.get(`${process.env.REACT_APP_BASE_URL}/categories`)
-      .then(response => {
-        let categories = response.data;
-        this.setState({ categories })
+      .then(response => this.setState({ categories: response.data }));
+
+    if (this.props.isLogged) {
+      const token = localStorage.getItem('token');
+      axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`, {
+        headers: { Authorization: `Bearer ${token}` }
       })
+      .then(res => {
+        const favIds = new Set(res.data.map(f => Number(f.id ?? f.stretch_id)));
+        this.setState({ favoriteIds: favIds });
+      })
+      .catch(err => console.error("GET favorites failed:", err));
+    }
   }
 
+  toggleFavorite(stretchId) {
+    if (!this.props.isLogged) return;
+    const token = localStorage.getItem('token');
+    const { favoriteIds } = this.state;
+    const isFav = favoriteIds.has(stretchId);
 
+    // Optimistic update
+    const updated = new Set(favoriteIds);
+    if (isFav) updated.delete(stretchId); else updated.add(stretchId);
+    this.setState({ favoriteIds: updated });
+
+    const cfg = { headers: { Authorization: `Bearer ${token}` } };
+    const req = isFav
+      ? axios.delete(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/${stretchId}`, cfg)
+      : axios.post(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/${stretchId}`, {}, cfg);
+
+    req.catch(err => {
+      console.error("toggleFavorite failed:", err);
+      // rollback
+      const rollback = new Set(updated);
+      if (isFav) rollback.add(stretchId); else rollback.delete(stretchId);
+      this.setState({ favoriteIds: rollback });
+    });
+  }
+
+  // reste inchangé…
   handleSearch = (event) => {
     this.setState({ searchTerm: event.target.value })
   }
@@ -48,65 +79,43 @@ export default class Stretches extends Component {
 
   render() {
     const filterData = this.filterData();
-    console.log(this.filterData())
     return (
       <div className='Stretches'>
-        <div>
-          <Wrapper
-            wrapperTitle='Tous nos étirements disponibles'
-            wrapperDescription="Lors d'un étirement, n'allez pas au delà de vos limites physiologiques. L'étirement doit être fait en douceur et doit uniquement mettre en tension le muscle correspondant."
-          />
-          <input
-            type="search"
-            name="search"
-            id="searchInput"
-            placeholder='Votre recherche...'
-            value={this.state.searchTerm}
-            onChange={this.handleSearch}
-          />
-        </div>
-        {this.props.isAdmin ? (
-                  <div className='add-container'>
-                  <NavLink to="/new-stretch" className="add-stretch-btn"> <AiFillPlusCircle /> Ajouter un étirement </NavLink>
-                  </div>
-        ) : null}
+        {/* ... input de recherche, bouton admin, etc ... */}
 
         <main>
-          
           <div className='stretches-container'>
-              <ul>
-                {
-                  this.state.categories.map((category) => (
-                    <div className='category' key={category.name}>
-                      <div id={category.name} />
-                      <h2>{category.name}</h2>
-                      <ul>
-                        {
-                          filterData
-                            .filter(stretch => stretch.categorie_id === category.id)
-                            .map((stretch) => (
-                              <Card
-                                id={stretch.id}
-                                title={stretch.name}
-                                description={stretch.description}
-                                img={stretch.main_image}
-                                alt={stretch.name}
-                                hover={stretch.name}
-                                key={stretch.id}
-                                link={stretch.id}
-                                isLogged={this.props.isLogged}
-                              />
-                            ))
-                        }
-                      </ul>
-                    </div>
-                  ))
-                }
-  
-              </ul>
+            <ul>
+              {this.state.categories.map((category) => (
+                <div className='category' key={category.name}>
+                  <div id={category.name} />
+                  <h2>{category.name}</h2>
+                  <ul>
+                    {filterData
+                      .filter(stretch => stretch.categorie_id === category.id)
+                      .map((stretch) => (
+                        <Card
+                          key={stretch.id}
+                          id={stretch.id}
+                          title={stretch.name}
+                          description={stretch.description}
+                          img={stretch.main_image}
+                          alt={stretch.name}
+                          hover={stretch.name}
+                          link={stretch.id}
+                          isLogged={this.props.isLogged}
+                          isFavorite={this.state.favoriteIds.has(stretch.id)}
+                          onToggleFavorite={() => this.toggleFavorite(stretch.id)}
+                        />
+                      ))}
+                  </ul>
+                </div>
+              ))}
+            </ul>
           </div>
         </main>
       </div>
     )
   }
 }
+

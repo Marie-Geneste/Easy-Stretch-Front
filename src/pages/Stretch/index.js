@@ -15,30 +15,49 @@ const Stretch = ({isLogged, isAdmin}) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [onEdit, setOnEdit] = useState(false);
     const token = localStorage.getItem('token');
-    console.log(stretch)
+    const authCfg = token ? { headers: { Authorization: `Bearer ${token}` } } : undefined;
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/stretches/${id}`)
             .then(response => {
                 setStretch(response.data)
             })
-    }, [id])
+    }, [id]);
 
-    const handleFavorite = (event) => {
+    useEffect(() => {
+        if (!isLogged || !token) {
+        setIsFavorite(false);
+        return;
+        }
+        axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`, authCfg)
+        .then(res => {
+            const listFav = Array.isArray(res.data) ? res.data : [];
+            const found = listFav.some(s => Number(s.id) === Number(id));
+            setIsFavorite(found);
+        })
+        .catch(err => {
+            console.error("GET favorites failed:", err);
+        });
+    }, [id, isLogged, token]);
+
+    const handleFavorite = async (event) => {
         event.preventDefault();
 
-        setIsFavorite(!isFavorite);
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-          };
-          console.log(config);
-          axios.post(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/${id}`,{}, config)
-            .then(response => {
-              setIsFavorite(true);
-            })
-            .catch(error => {
-              console.log(error);
-            }, [token]);
+        if (!isLogged || !token) return;
+
+        const next = !isFavorite;
+        setIsFavorite(next);
+
+        try {
+        if (next) {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/${id}`, {}, authCfg);
+        } else {
+            await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/${id}`, authCfg);
+        }
+        } catch (err) {
+            console.error("Toggle favorite failed:", err);
+            setIsFavorite(!next);
+        }
     };
     const handleDelete = () => {
         const config = {
