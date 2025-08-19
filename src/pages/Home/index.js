@@ -14,7 +14,7 @@ const Home = () => {
             <header>
                 <div className='Home'>
                     <Wrapper
-                        wrapperTitle="Une nouvelle approche des étirements"
+                        wrapperTitle="Trouvez votre étirement"
                         wrapperDescription="Lors d'un étirement, n'allez pas au delà de vos limites physiologiques. L'étirement doit être fait en douceur et doit uniquement mettre en tension le muscle correspondant."
                     />
                     <Link className='discover-button' to="/stretches">

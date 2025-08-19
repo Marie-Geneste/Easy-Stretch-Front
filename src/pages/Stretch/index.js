@@ -85,17 +85,19 @@ const Stretch = ({isLogged, isAdmin}) => {
                         title={stretch.name}
                         className="stretch-image"
                     />
-                {isLogged ? (
-                <span onClick={handleFavorite} className="fav-icon">
-                { isFavorite ? <AiFillHeart className='filled-icon' /> : <AiOutlineHeart />}
-                </span>) : null
-                }
 
                 </div>
                 {onEdit ? 
                 <StretchForm stretch={stretch} setStretch={setStretch} id={id} setOnEdit={setOnEdit}/> : 
                 (<div className="stretch-infos">
-                    <h1>{stretch.name}</h1>
+                    <div className="title-container">
+                        <h1>{stretch.name} </h1> 
+                        {isLogged ? (
+                            <span onClick={handleFavorite}>
+                            { isFavorite ? <AiFillHeart className='filled-icon' /> : <AiOutlineHeart />}
+                            </span>) : null
+                            }
+                    </div>
                     <p>{stretch.description}</p>
                     {isAdmin ? (
                                 <div className="icon-box">
