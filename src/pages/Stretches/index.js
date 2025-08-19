@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { Component } from 'react';
+import { NavLink } from "react-router-dom";
 
 // Components
+import Wrapper from '../../components/Wrapper';
 import Card from '../../components/Card';
 
 // Styles
 import './styles.scss';
+import { AiFillPlusCircle } from 'react-icons/ai';
 
 
 export default class Stretches extends Component {
@@ -81,7 +84,25 @@ export default class Stretches extends Component {
     const filterData = this.filterData();
     return (
       <div className='Stretches'>
-        {/* ... input de recherche, bouton admin, etc ... */}
+        <div>
+          <Wrapper
+            wrapperTitle='Tous nos étirements disponibles'
+            wrapperDescription="Lors d'un étirement, n'allez pas au delà de vos limites physiologiques. L'étirement doit être fait en douceur et doit uniquement mettre en tension le muscle correspondant."
+          />
+          <input
+            type="search"
+            name="search"
+            id="searchInput"
+            placeholder='Votre recherche...'
+            value={this.state.searchTerm}
+            onChange={this.handleSearch}
+          />
+        </div>
+        {this.props.isAdmin ? (
+                  <div className='add-container'>
+                  <NavLink to="/new-stretch" className="add-stretch-btn"> <AiFillPlusCircle /> Ajouter un étirement </NavLink>
+                  </div>
+        ) : null}
 
         <main>
           <div className='stretches-container'>
