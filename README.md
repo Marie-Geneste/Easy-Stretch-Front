@@ -55,3 +55,30 @@ npm start
 ```
 
 Accessible sur : http://localhost:3000
+
+
+---
+
+## Structure du projet
+
+```c#
+O-STRETCH--FRONT/
+ ├── public/               # Fichiers statiques
+ ├── src/
+ │   ├── assets/           # Images pour appli react, statique
+ │   ├── components/       # Composants réutilisables
+ │   ├── pages/            # Pages principales
+ │   ├── App.js            # Point d'entrée principal
+ │   └── index.js
+ └── package.json
+ ```
+
+ ---
+
+## Scripts disponibles
+
+npm start → lance l’app en mode dev
+
+npm run build → build pour la prod
+
+npm test → exécute les tests
