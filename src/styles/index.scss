@@ -2,6 +2,10 @@
 @import './vars';
 @import './responsive';
 
+
+html, body { overflow-x: hidden; } /* Hotfix anti-bande */
+
+
 body {
     font-family: 'Poppins', sans-serif;
     background: rgb(234,226,247);

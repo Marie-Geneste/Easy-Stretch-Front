@@ -24,11 +24,6 @@
     }
 
     & .my-favorites {
-        position: absolute;
-        width: 209px;
-        height: 45px;
-        left: 616px;
-        top: 747px;
         font-family: 'Poppins', sans-serif;
         font-style: normal;
         font-weight: 600;
@@ -89,15 +84,16 @@
         padding: 15px;
         cursor: pointer;
     }
+
 .bookmarks-cards{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: center;
+        gap: 2rem;
     }
 }
 
 .card-container {
-    margin-right: 20px;
     position: relative;
 }
 

@@ -1,4 +1,3 @@
-// RESPONSIVES BREAKPOINTS
 // Mobile devices – 320px — 480px
 @media screen and (min-width: 320px) and (max-width: 480px) {
     .Home {
@@ -195,6 +194,32 @@
             width: 100%;
         }
     }
+
+    .card-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+
+        & .card-footer {
+            width: 200px;
+        }
+    }
+
+    .bookmarks-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .Form {
+        width: 250px;
+
+        & button {
+            width: 250px;
+        }
+    }
 }
 
 // iPads, Tablets – 481px — 768px
@@ -297,6 +322,13 @@
         }
     }
 
+    #category-cards{
+        & .card{
+            width: 100px;
+            height: 125px;
+        }
+    }
+
     .login {
         
         & .box-container {
@@ -345,6 +377,32 @@
     .ErrorPage {
         & img {
             width: 100%;
+        }
+    }
+
+    .card-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+
+        & .card-footer {
+            width: 200px;
+        }
+    }
+
+    .bookmarks-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .Form {
+        width: 350px;
+
+        & button {
+            width: 350px;
         }
     }
 }
@@ -443,6 +501,35 @@
             }
         }
     }
+
+    #category-cards{
+        & .card{
+            width: 150px;
+            height: 175px;
+        }
+    }
+
+    .card-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+
+        & .card-footer {
+            width: 200px;
+        }
+    }
+
+    .bookmarks-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .Form {
+        width: 500px;
+    }
 }
 
 // Desktops, large screens – 1025px — 1200px
@@ -489,7 +576,33 @@
             }
         }
     }
+
+    #category-cards{
+        & .card{
+            width: 175px;
+            height: 200px;
+        }
+    }
+
+    .card-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+
+        & .card-footer {
+            width: 200px;
+        }
+    }
+
+    .bookmarks-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+    }
 }
+
 // Laptop: 1366 x 768
 @media screen and (min-width: 1201px) and (max-width: 1650px) {
     .Stretches {
@@ -562,4 +675,33 @@
             }
         }
     }
+
+    #category-cards{
+        & .card{
+            width: 200px;
+            height: 225px;
+        }
+    }
+
+
+    .card-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+
+        & .card-footer {
+            width: 200px;
+        }
+    }
+
+    .bookmarks-container {
+        & .card {
+            width: 200px;
+            height: 200px;
+        }
+    }
+    
 }
+
+

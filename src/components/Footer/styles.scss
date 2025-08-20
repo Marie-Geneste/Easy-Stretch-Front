@@ -84,3 +84,51 @@
         background-color: #66579A;
     }
 }
+
+/* === Footer responsive fixes === */
+.Footer {
+  margin: 0;
+    margin-top: 4em;
+    padding: 0;
+    color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #7867B1;
+}
+
+.Footer .footer-links ul {
+  width: min(100%, 1000px);           /* plus de 800px fixe */
+  padding: 0 1rem;                    /* respiration */
+  flex-wrap: wrap;                    /* passe à la ligne si besoin */
+  gap: .5rem 1rem;                    /* espace entre liens */
+  height: auto;                       /* plus de hauteur fixe */
+}
+
+.Footer .footer-links ul a {
+  padding: .5rem 1.75rem;
+  display: inline-block;
+}
+
+.Footer .footer-socials ul {
+  width: min(100%, 520px);            /* plus de 350px fixe */
+  padding: 0 1rem;
+  gap: .75rem 1rem;
+  height: auto;
+  flex-wrap: wrap;
+}
+
+.Footer .footer-socials ul a {
+  width: clamp(42px, 8vw, 50px);
+  height: clamp(42px, 8vw, 50px);
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+}
+
+/* Petits écrans : tout sur une seule colonne si besoin */
+@media (max-width: 640px) {
+  .Footer .footer-links ul {
+    justify-content: center;
+    gap: .25rem .75rem;
+  }
+  .Footer .footer-text {
+    padding: 0 1rem;
+  }
+}

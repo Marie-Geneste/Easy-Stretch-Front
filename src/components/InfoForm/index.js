@@ -88,11 +88,6 @@ const InfoForm = ({user, setUser, setIsEditOpen, setIsLogged}) => {
           Mon pseudo:
       </p>
         <input type="text" name="username" value={userValue.username} className='infos' placeholder={user.username} onChange={handleChange}/> 
-      
-        <p>
-          Ma bio:
-        </p>
-        <textarea rows="5" cols="33" type="text" name="biography" value={userValue.biography} className='infos'  placeholder={user.biography} onChange={handleChange}/>
   
 
         <button className="modify-btn" >Enregistrer</button>

@@ -83,6 +83,11 @@ const Navbar = ({ isLogged, onLogout }) => {
                             Étirements
                         </li>
                     </Link>
+                    <Link className="contact" to="/contact">
+                        <li>
+                            Contact
+                        </li>
+                    </Link>
                     {
                         isLogged ? <NavLink to ="/my-space" className='user'>Mon espace</NavLink> : <NavLink to="/login" className="login">Login</NavLink>
                     }
