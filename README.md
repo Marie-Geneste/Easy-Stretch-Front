@@ -54,7 +54,7 @@ npm install
 npm start
 ```
 
-Accessible sur : http://localhost:3000
+Accessible sur : http://localhost:3001
 
 
 ---
@@ -82,3 +82,10 @@ npm start → lance l’app en mode dev
 npm run build → build pour la prod
 
 npm test → exécute les tests
+
+
+ ---
+
+## Connexion au Back end
+
+Pour que les appels API fonctionnent, s'assurer que le backend soit lancé sur http://localhost:3000.
