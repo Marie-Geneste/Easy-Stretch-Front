@@ -9,8 +9,8 @@ const NewStretch = () => {
     const navigate = useNavigate();
     const [errorInput, setErrorInput] = useState(false)
     const [userValue, setUserValue] = useState({
-        title: "",
-        description_content: "",
+        name: "",
+        description: "",
         main_image: "",
         category_id:""
     });
@@ -20,7 +20,7 @@ const NewStretch = () => {
         event.preventDefault();
         console.log(userValue)
         const token = localStorage.getItem('token');
-        if (userValue.title === '' || userValue.description_content === '') {
+        if (userValue.name === '' || userValue.description === '') {
           setErrorInput(true)
           } else {
         axios.post(`${process.env.REACT_APP_BASE_URL}/stretches`, userValue, {
@@ -59,7 +59,7 @@ const NewStretch = () => {
      <p>
           Nom de l'étirement:
       </p>
-        <input type="text" name="title" value={userValue.title} className='infos' placeholder="Etirement" onChange={handleChange}/> 
+        <input type="text" name="name" value={userValue.name} className='infos' placeholder="Etirement" onChange={handleChange}/> 
 
         <p>
           URL de la photo:
@@ -69,7 +69,7 @@ const NewStretch = () => {
         <p>
           Description:
         </p>
-        <textarea rows="5" cols="33" type="text" name="description_content" value={userValue.description_content} className='infos'  placeholder="Pour étirer ce muscle..." onChange={handleChange}/>
+        <textarea rows="5" cols="33" type="text" name="description" value={userValue.description} className='infos'  placeholder="Pour étirer ce muscle..." onChange={handleChange}/>
 
         <p>Catégorie:</p>
 
