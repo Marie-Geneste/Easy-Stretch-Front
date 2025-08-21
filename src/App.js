@@ -14,6 +14,8 @@ import MySpace from './pages/MySpace';
 import Formulaire from './pages/Contact/Formulaire';
 import NewStretch from './pages/NewStretch';
 import Footer from './components/Footer/Footer';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 
 const App = () => {
@@ -47,6 +49,8 @@ const handleLogout = () => {
         <Route path='/stretches/:id' element={<Stretch isAdmin={isAdmin} isLogged={isLogged}/>} />
         <Route path='/login' element={<Login onSubmitLoginForm={handleLogin} />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/contact' element={<Formulaire />} />
         {
         isLogged ? <Route path='/my-space' element={<MySpace user={user} setUser={setUser} setIsLogged={setIsLogged} />} /> : <Route path='/my-space' element={<Login />} />

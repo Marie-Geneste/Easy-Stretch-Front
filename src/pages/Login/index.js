@@ -67,6 +67,7 @@ const handleSubmit = async (e) =>{
             <input type="password" name="password" placeholder="Mot de passe" value={password} onChange={handlePasswordChange}/>
           </div>
           <button className="primary">Connexion</button>
+          <NavLink to="/forgot-password" className="forgot">Mot de passe oublié ?</NavLink>
           <p>Pas encore inscrit ?</p>
           <NavLink to="/signup" className="signup">Créer un compte</NavLink>
         </form>

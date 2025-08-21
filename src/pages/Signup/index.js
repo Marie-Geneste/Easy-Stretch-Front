@@ -12,8 +12,10 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [passwordConfirm, setPasswordConfirm] = useState('');
 const [errorPassword, setErrorPassword] = useState(false);
-const [errorConfirm, setErrorConfirm] = useState(false)
-const [errorInput, setErrorInput] = useState(false)
+const [errorConfirm, setErrorConfirm] = useState(false);
+const [errorInput, setErrorInput] = useState(false);
+const [errorEmailExists, setErrorEmailExists] = useState(false);
+const [customError, setCustomError] = useState(false);
 
 const handleUsernameChange = (e) => {
     setUsername(e.target.value)
@@ -38,25 +40,39 @@ const handlePasswordChange = (event) => {
 
 const handleSubmit = async (e) =>{
     e.preventDefault();
-        if (username === '' || email === '') {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (username === '' || email === '') {
         setErrorInput(true)
-        } else if ( password.length < 8) {
+    } else if (!emailRegex.test(email)) {
+        setCustomError('Email invalide');
+    } else if ( password.length < 8) {
         setErrorPassword(true);
-        } else if (passwordConfirm !== password){
+    } else if (passwordConfirm !== password){
         setErrorConfirm(true);
-        } else {
-    try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/user`, {         
-        username,    
-        email,
-        password,
-        passwordConfirm});
-        console.log(response.data);
-        setErrorPassword(false);
-        navigate('/login');
-      } catch (error) {
-        console.error(error);
-      }
+    } else {
+        try {
+            // Vérifier si l'email existe déjà AVANT d'essayer de créer le compte
+            const checkResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/check-email`, {
+                params: { email }
+            });
+
+            if (checkResponse.data.exists) {
+                setErrorEmailExists(true);
+                return; // On stoppe l'inscription
+            }
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/user`, {         
+            username,    
+            email,
+            password,
+            passwordConfirm});
+            console.log(response.data);
+            setErrorPassword(false);
+            navigate('/login');
+        } catch (error) {
+            console.error(error);
+        }
 
 }}
 
@@ -66,15 +82,19 @@ const handleSubmit = async (e) =>{
             <img src={logoES} alt="logo Easy Stretch" />
             <h2>Créer un compte</h2>
 
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit} noValidate>
                 {
                 errorInput ? <div className='error'> Tous les champs sont obligatoires </div> : null
                 }
                 <div className="input-group">
                     <input type="text" name="name" placeholder="Name" value={username} onChange={handleUsernameChange}/>
                 </div>
+                {errorEmailExists && (
+                    <div className='error'>Cet email est déjà utilisé</div>
+                )}
+                {customError && <span className="error">{customError}</span>}
                 <div className="input-group">
-                    <input type="email" name="email" placeholder="Adresse mail" value={email} onChange={handleEmailChange}/>
+                    <input type="email" name="email" placeholder="Adresse mail"  value={email} onChange={handleEmailChange}/>
                 </div>
                 {
                 errorPassword ? <div className='error'> Le mot de passe doit contenir min 8 caractères </div> : null
