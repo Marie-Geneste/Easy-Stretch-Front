@@ -3,6 +3,7 @@ import logoES from '../../assets/img/favicon.png'
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Signup = () => {
 const navigate = useNavigate();
@@ -16,6 +17,12 @@ const [errorConfirm, setErrorConfirm] = useState(false);
 const [errorInput, setErrorInput] = useState(false);
 const [errorEmailExists, setErrorEmailExists] = useState(false);
 const [customError, setCustomError] = useState(false);
+const [captchaToken, setCaptchaToken] = useState(null);
+
+const handleCaptcha = (token) => {
+    setCaptchaToken(token);
+};
+
 
 const handleUsernameChange = (e) => {
     setUsername(e.target.value)
@@ -40,6 +47,11 @@ const handlePasswordChange = (event) => {
 
 const handleSubmit = async (e) =>{
     e.preventDefault();
+
+    if (!captchaToken) {
+      alert("Veuillez valider le captcha !");
+      return;
+    }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -66,7 +78,9 @@ const handleSubmit = async (e) =>{
             username,    
             email,
             password,
-            passwordConfirm});
+            passwordConfirm,
+            captchaToken 
+        });
             console.log(response.data);
             setErrorPassword(false);
             navigate('/login');
@@ -108,6 +122,10 @@ const handleSubmit = async (e) =>{
                 <div className="input-group">
                     <input type="password" name="confirm" placeholder="Confirmez le mot de passe" value={passwordConfirm} onChange={handlePasswordConfirmChange}/>
                 </div>
+                <ReCAPTCHA
+                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+                    onChange={handleCaptcha}
+                />
                 <button className="primary">S'inscrire</button>
             </form>
         
