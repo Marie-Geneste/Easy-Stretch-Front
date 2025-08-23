@@ -29,7 +29,7 @@ const Stretch = ({isLogged, isAdmin}) => {
         setIsFavorite(false);
         return;
         }
-        axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`, authCfg)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`,  token)
         .then(res => {
             const listFav = Array.isArray(res.data) ? res.data : [];
             const found = listFav.some(s => Number(s.id) === Number(id));
@@ -38,7 +38,7 @@ const Stretch = ({isLogged, isAdmin}) => {
         .catch(err => {
             console.error("GET favorites failed:", err);
         });
-    }, [id, isLogged, authCfg]);
+    }, [id, isLogged, token]);
 
     const handleFavorite = async (event) => {
         event.preventDefault();
