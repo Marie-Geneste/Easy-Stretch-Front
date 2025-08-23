@@ -2,7 +2,7 @@
 # docker run -d --name reactcontainer frontimage
 FROM node:24
 
-WORKDIR /O-Stretch--Front
+WORKDIR /Easy-Stretch-Front
 
 COPY package*.json ./
 RUN npm install

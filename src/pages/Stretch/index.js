@@ -38,7 +38,7 @@ const Stretch = ({isLogged, isAdmin}) => {
         .catch(err => {
             console.error("GET favorites failed:", err);
         });
-    }, [id, isLogged, token]);
+    }, [id, isLogged, authCfg]);
 
     const handleFavorite = async (event) => {
         event.preventDefault();
