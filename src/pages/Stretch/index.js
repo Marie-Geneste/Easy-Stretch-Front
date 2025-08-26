@@ -29,7 +29,10 @@ const Stretch = ({isLogged, isAdmin}) => {
         setIsFavorite(false);
         return;
         }
-        axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`,  token)
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+          };
+        axios.get(`${process.env.REACT_APP_BASE_URL}/user/me/stretches/`, config)
         .then(res => {
             const listFav = Array.isArray(res.data) ? res.data : [];
             const found = listFav.some(s => Number(s.id) === Number(id));
@@ -63,13 +66,13 @@ const Stretch = ({isLogged, isAdmin}) => {
         const config = {
             headers: { Authorization: `Bearer ${token}` }
           };
-          axios.delete(`${process.env.REACT_APP_BASE_URL}/stretches/${id}`, config)
-          .then(response => {
-            navigate("/stretches")
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        axios.delete(`${process.env.REACT_APP_BASE_URL}/stretches/${id}`, config)
+        .then(response => {
+        navigate("/stretches")
+        })
+        .catch(error => {
+        console.log(error);
+        });
     }
     const handleEdit = () => {
         setOnEdit(!onEdit);
