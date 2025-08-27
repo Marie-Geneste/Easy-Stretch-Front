@@ -94,13 +94,20 @@ const Stretch = ({isLogged, isAdmin}) => {
                 <StretchForm stretch={stretch} setStretch={setStretch} id={id} setOnEdit={setOnEdit}/> : 
                 (<div className="stretch-infos">
                     <div className="title-container">
-                        <h1>{stretch.name} </h1> 
+                        <h1>{stretch.name}</h1>
                         {isLogged ? (
-                            <span onClick={handleFavorite}>
-                            { isFavorite ? <AiFillHeart className='filled-icon' /> : <AiOutlineHeart />}
-                            </span>) : null
-                            }
-                    </div>
+                            <span
+                            className="favorite-toggle"
+                            onClick={handleFavorite}
+                            >
+                            {isFavorite ? (
+                                <AiFillHeart className="filled-icon" />
+                            ) : (
+                                <AiOutlineHeart />
+                            )}
+                            </span>
+                        ) : null}
+                        </div>
                     <p>{stretch.description}</p>
                     {isAdmin ? (
                                 <div className="icon-box">

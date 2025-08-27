@@ -1,0 +1,39 @@
+.success-page {
+  margin: 5% auto;
+  padding: 40px;
+  width: 600px;
+  max-width: 90%;
+  text-align: center;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+  .success-icon {
+    font-size: 80px;
+    color: #28a745; // vert check
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .home-button {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 10px;
+    background-color: #6c63ff; // ton violet ($purple-color si tu veux)
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(2px) scale(1.05);
+    }
+  }
+}

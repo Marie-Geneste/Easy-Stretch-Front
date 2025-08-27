@@ -101,7 +101,7 @@ const handleSubmit = async (e) =>{
                 errorInput ? <div className='error'> Tous les champs sont obligatoires </div> : null
                 }
                 <div className="input-group">
-                    <input type="text" name="name" placeholder="Name" value={username} onChange={handleUsernameChange}/>
+                    <input type="text" name="name" maxLength={15} pattern="^[A-Za-z0-9_.-]{3,15}$" placeholder="Name" value={username} onChange={handleUsernameChange}/>
                 </div>
                 {errorEmailExists && (
                     <div className='error'>Cet email est déjà utilisé</div>

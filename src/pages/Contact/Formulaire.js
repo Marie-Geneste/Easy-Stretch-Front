@@ -2,6 +2,7 @@
 import axios from 'axios';
 import './formulaire.scss';
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Formulaire = () => {
     const contactFormRef = useRef(null);
@@ -9,6 +10,7 @@ const Formulaire = () => {
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -23,12 +25,14 @@ const Formulaire = () => {
         axios.post(`${process.env.REACT_APP_BASE_URL}/contact`, formData)
             .then(response => response.data)
             .then(data => {
-                if (data === 'success') {
-                    console.log("email sent");
+                const ok = data === 'success' || data?.ok === true;
+
+                if (ok) {
                     setName('');
                     setEmail('');
                     setSubject('');
                     setMessage('');
+                    navigate('/success');
                 } else {
                     console.log("Something went wrong");
                 }

@@ -1,6 +1,6 @@
 // ForgotPassword.jsx
 import { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import logoES from '../../assets/img/favicon.png'
 import axios from 'axios';
 import './styles.scss';
@@ -8,12 +8,14 @@ import './styles.scss';
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/forgot-password`, { email });
       setMessage(res.data.message);
+      navigate("/success");
     } catch (err) {
       setMessage(err.response?.data?.message || 'Erreur');
     }
