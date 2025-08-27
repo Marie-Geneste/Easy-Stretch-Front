@@ -31,10 +31,6 @@ const InfoForm = ({user, setUser, setIsEditOpen, setIsLogged}) => {
         updatedData.username = userValue.username;
       }
     
-      if (userValue.biography !== "") {
-        updatedData.biography = userValue.biography;
-      }
-
       const token = localStorage.getItem('token'); // Récupérer le jeton d'authentification stocké dans le stockage local
       console.log(token)
 
@@ -87,7 +83,7 @@ const InfoForm = ({user, setUser, setIsEditOpen, setIsLogged}) => {
      <p>
           Mon pseudo:
       </p>
-        <input type="text" name="username" value={userValue.username} className='infos' placeholder={user.username} onChange={handleChange}/> 
+        <input maxLength={15} pattern="^[A-Za-z0-9_.-]{3,15}$" type="text" name="username" value={userValue.username} className='infos' placeholder={user.username} onChange={handleChange}/> 
   
 
         <button className="modify-btn" >Enregistrer</button>
