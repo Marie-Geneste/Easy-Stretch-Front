@@ -16,6 +16,7 @@ import NewStretch from './pages/NewStretch';
 import Footer from './components/Footer/Footer';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import SuccessPage from './pages/SuccessPage';
 
 
 const App = () => {
@@ -52,6 +53,7 @@ const handleLogout = () => {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/contact' element={<Formulaire />} />
+        <Route path="/success" element={<SuccessPage />} />
         {
         isLogged ? <Route path='/my-space' element={<MySpace user={user} setUser={setUser} setIsLogged={setIsLogged} />} /> : <Route path='/my-space' element={<Login />} />
         }
