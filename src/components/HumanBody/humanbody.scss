@@ -62,6 +62,13 @@
         }
     }
 }
+
+.HumanBody svg[role="button"]:focus {
+  outline: none;            
+  fill: $purple-color;          
+  cursor: pointer;
+}
+
 .main-body{
     width: 100%;
     position: relative;

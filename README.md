@@ -89,3 +89,20 @@ npm test → exécute les tests
 ## Connexion au Back end
 
 Pour que les appels API fonctionnent, s'assurer que le backend soit lancé sur http://localhost:3000.
+
+
+## Déploiement :
+
+L’application **Easy Stretch** est déployée automatiquement grâce à un pipeline **CI/CD** basé sur GitHub Actions.
+
+### CI/CD
+- La branche `prod` de ce repository est branchée sur la plateforme d’hébergement (Netlify pour le front, Render pour le back).
+- À chaque **push** sur `prod`, un workflow **GitHub Actions** (fichier `.ci.yml`) exécute les **tests unitaires et d’intégration**.
+- Si les tests sont validés, le **build** est déclenché et la mise en ligne effectuée automatiquement.
+
+### Variables d’environnement
+Les variables sensibles sont stockées dans des fichiers `.env` non versionnés.
+
+### Hébergement
+- **Front-end** : déployé sur **Netlify**, [https://easy-stretch.netlify.app/](https://easy-stretch.netlify.app/)  
+- **Back-end** : hébergé sur **Render**, [https://easy-stretch-back.onrender.com](https://easy-stretch-back.onrender.com)  
